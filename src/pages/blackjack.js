@@ -13,26 +13,15 @@ import styles from '../styles/App.module.scss';
 
 function App() {
   const { t } = useTranslation('blackjack');
-  const [{
-      dealerCards,
-      playerCards
-    },
-    gameStatus,
-    newGame,
-    playerStand,
-    playerHit,
-  ] = useGameState();
+  const [{ dealerCards, playerCards }, gameStatus, newGame, playerStand, playerHit] = useGameState();
 
   const PlayButton = () => (
-    <Button
-      className={styles.LetsPlay}
-      type="button"
-      onClick={newGame}
-      color={buttonColors.NEUTRAL}
-    >{t('play')}</Button>
+    <Button className={styles.LetsPlay} type="button" onClick={newGame} color={buttonColors.NEUTRAL}>
+      {t('play')}
+    </Button>
   );
 
-  if(gameStatus === STATUSES.IDLE){
+  if (gameStatus === STATUSES.IDLE) {
     return (
       <div className={styles.App}>
         <PlayButton />
@@ -41,21 +30,18 @@ function App() {
   }
 
   return (
-      <div className={styles.App}>
-        <DealerHand
-          gameStatus={gameStatus}
-          dealerCards={dealerCards}
-        />
-        <PlayerHand playerCards={playerCards} />
-        <Actions
-          playerHit={playerHit}
-          playerStand={playerStand}
-          disabled={gameStatus !== STATUSES.PLAYER_TURN}
-        />
-        <Message gameStatus={gameStatus}>
-          <PlayButton />
-        </Message>
-      </div>
+    <div className={styles.App}>
+      <DealerHand gameStatus={gameStatus} dealerCards={dealerCards} />
+      <PlayerHand playerCards={playerCards} />
+      <Actions
+        playerHit={playerHit}
+        playerStand={playerStand}
+        disabled={gameStatus !== STATUSES.PLAYER_TURN}
+      />
+      <Message gameStatus={gameStatus}>
+        <PlayButton />
+      </Message>
+    </div>
   );
 }
 

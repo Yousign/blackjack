@@ -10,7 +10,7 @@ function Card({ code }) {
 }
 
 Card.propTypes = {
-  code: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired
 };
 
 export default Card;

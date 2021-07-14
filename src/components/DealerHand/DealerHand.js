@@ -6,11 +6,7 @@ import styles from './DealerHand.module.scss';
 
 import { STATUSES } from '../../constants';
 import Score from '../Score/Score';
-const {
-  DEALER_TURN,
-  PLAYER_WINS,
-  DEALER_WINS,
-} = STATUSES;
+const { DEALER_TURN, PLAYER_WINS, DEALER_WINS } = STATUSES;
 
 function DealerHand({ gameStatus, dealerCards }) {
   const displayDealerScoreCards = [DEALER_TURN, PLAYER_WINS, DEALER_WINS].includes(gameStatus);
@@ -20,12 +16,7 @@ function DealerHand({ gameStatus, dealerCards }) {
 
   return (
     <div className={styles.Dealer}>
-      {
-        dealerCards.length !== 0 &&
-          <Score
-            ariaLabel='Dealer score'
-          >{dealerScore}</Score>
-      }
+      {dealerCards.length !== 0 && <Score ariaLabel="Dealer score">{dealerScore}</Score>}
       <Cards cards={adequateDealerCards} />
     </div>
   );
@@ -33,10 +24,11 @@ function DealerHand({ gameStatus, dealerCards }) {
 
 DealerHand.propTypes = {
   gameStatus: PropTypes.string.isRequired,
-  dealerCards: PropTypes.arrayOf(PropTypes.shape({
-    code: PropTypes.string.isRequired,
-  })).isRequired,
+  dealerCards: PropTypes.arrayOf(
+    PropTypes.shape({
+      code: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
-
 
 export default DealerHand;

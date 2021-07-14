@@ -23,7 +23,8 @@
     "lint:js": "eslint src",
     "lint:css": "stylelint src",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -34,7 +35,10 @@
     "autoprefixer": "^10.2.6",
     "eslint": "^7.16.0",
     "gh-pages": "^3.1.0",
+    "husky": "^6.0.0",
     "postcss": "^8.3.5",
+    "prettier": "^2.3.2",
+    "pretty-quick": "^3.1.1",
     "sass": "^1.30.0",
     "stylelint": "^13.8.0",
     "stylelint-config-standard": "^20.0.0",

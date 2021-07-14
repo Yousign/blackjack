@@ -6,8 +6,8 @@ module.exports = nextTranslate({
       {
         source: '/',
         destination: '/blackjack',
-        permanent: true,
-      },
-    ]
-  },
-})
+        permanent: true
+      }
+    ];
+  }
+});
