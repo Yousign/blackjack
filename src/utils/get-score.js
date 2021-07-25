@@ -2,7 +2,7 @@ import { CARDS } from '../constants';
 
 const { JACK, QUEEN, KING, ACE } = CARDS;
 
-export const getScore = (cards) => {
+const getScore = (cards) => {
   const rearranged = [];
   cards.forEach((card) => {
     if (card.value === ACE) {
@@ -18,7 +18,9 @@ export const getScore = (cards) => {
     } else if (card.value === ACE) {
       return total + 11 <= 21 ? total + 11 : total + 1;
     } else {
-      return total + parseInt(card.value, 0);
+      return total + parseInt(card.value, 10);
     }
   }, 0);
 };
+
+export default getScore;

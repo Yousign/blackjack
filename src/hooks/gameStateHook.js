@@ -37,7 +37,7 @@ export function useGameState() {
   };
 
   const playerStand = () => {
-    setGameStatus(DEALER_TURN);
+    dispatch(setGameStatus(DEALER_TURN));
   };
 
   const drawCard = useCallback(
@@ -54,35 +54,43 @@ export function useGameState() {
   );
 
   const playerHit = () => {
-    drawCard(PLAYER);
+    dispatch(setPlayer(PLAYER));
+    dispatch(drawCard());
   };
 
   useEffect(() => {
-    const dealerScore = getScore(gameState.dealerCards);
-    const playerScore = getScore(gameState.playerCards);
+    const dealerScore = getScore(dealerCards);
+    const playerScore = getScore(playerCards);
 
     if (gameStatus === PLAYER_TURN) {
       if (playerScore === BLACKJACK_VALUE) {
         if (gameState.playerCards.length === 2) {
           setGameStatusWithDelay(BLACKJACK);
         } else {
-          setGameStatusWithDelay(PLAYER_WINS);
+          dispatch(setGameStatusWithDelay(PLAYER_WINS));
         }
       } else if (playerScore > BLACKJACK_VALUE) {
-        setGameStatusWithDelay(DEALER_WINS);
+        dispatch(setGameStatusWithDelay(DEALER_WINS));
       }
     } else if (gameStatus === DEALER_TURN) {
       if (dealerScore < DEALER_MIN_VALUE) {
-        drawCard(DEALER);
+        dispatch(setPlayer(DEALER));
+        dispatch(drawCard());
       } else {
         if ((dealerScore > playerScore && dealerScore <= BLACKJACK_VALUE) || dealerScore === playerScore) {
-          setGameStatusWithDelay(DEALER_WINS);
+          dispatch(setGameStatusWithDelay(DEALER_WINS));
         } else {
-          setGameStatusWithDelay(PLAYER_WINS);
+          dispatch(setGameStatusWithDelay(PLAYER_WINS));
         }
       }
     }
-  }, [gameState.dealerCards, gameState.playerCards, gameStatus, drawCard]);
+  }, [dealerCards, playerCards, gameStatus, dispatch]);
+
+  // newGame
+  useEffect(() => {
+    dispatch(setGameState(initialState));
+    dispatch(setGameStatus(PLAYER_TURN));
+  }, [initialState.deckId, dispatch]);
 
   return [gameState, gameStatus, newGame, playerStand, playerHit];
 }
