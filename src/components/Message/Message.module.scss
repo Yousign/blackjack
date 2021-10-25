@@ -25,20 +25,14 @@
   margin-bottom: 40px;
 }
 
-.Blackjack,
-.YouWin,
-.YouLose {
-  padding: 10px;
-}
-
-.Blackjack {
+.blackjack {
   background: #191956;
 }
 
-.YouWin {
+.player-wins {
   background: #8cc63f;
 }
 
-.YouLose {
+.dealer-wins {
   background: #b70027;
 }

@@ -1,4 +1,4 @@
-import { getScore } from './blackjackService';
+import getScore from '../utils/get-score';
 import { CARDS } from '../constants';
 
 const { ACE, JACK, QUEEN, KING } = CARDS;
